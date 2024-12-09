@@ -1,4 +1,6 @@
 
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_session/firebase_options.dart';
 import 'package:firebase_session/screens/chatt_screen.dart';
 import 'package:firebase_session/screens/login_screen.dart';
 import 'package:firebase_session/screens/sinup_screen.dart';
@@ -7,7 +9,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 void main() async {
-  
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+);
   runApp(MyApp());
 }
 

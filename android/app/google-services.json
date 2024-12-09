@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "268013382513",
+    "project_id": "fir-session-fcff7",
+    "storage_bucket": "fir-session-fcff7.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:268013382513:android:431f9a6c0bd561ef5524d0",
+        "android_client_info": {
+          "package_name": "com.example.firebase_session"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBtye78Iwf5lcNvtHf07ciue6twivSqYqw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

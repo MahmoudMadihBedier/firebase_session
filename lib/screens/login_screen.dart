@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_session/screens/chatt_screen.dart';
 import 'package:firebase_session/theming/colors.dart';
 import 'package:firebase_session/widgets/button_widget.dart';
 import 'package:flutter/cupertino.dart';
@@ -11,6 +13,10 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final auth = FirebaseAuth.instance;
+  late String email;
+  late String password;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,7 +48,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: 20,
                   ),
                   TextField(
-                      onChanged: (value) {},
+                    keyboardType: TextInputType.emailAddress,
+                      onChanged: (value) {
+                        email = value;
+                      },
                       decoration: InputDecoration(
                         label: Text('Email'),
                         border: OutlineInputBorder(
@@ -57,7 +66,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: 15,
                   ),
                   TextField(
-                      onChanged: (value) {},
+                    obscureText: true,
+                      onChanged: (value) {
+                        password = value;
+                      },
                       decoration: InputDecoration(
                         label: Text('password'),
                         border: OutlineInputBorder(
@@ -74,7 +86,13 @@ class _LoginScreenState extends State<LoginScreen> {
                   ButtonWidget(
                       text: 'Login',
                       color: Colortheme.primary,
-                      onPressrd: () {}),
+                      onPressrd: () async {
+                        final user = await auth.signInWithEmailAndPassword(
+                            email: email, password: password);
+                        if (user != null) {
+                          Navigator.pushNamed(context, ChattScreen.routeName);
+                        }
+                      }),
                 ])));
   }
 }

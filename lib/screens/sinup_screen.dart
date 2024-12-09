@@ -1,9 +1,9 @@
-
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_session/screens/chatt_screen.dart';
 import 'package:firebase_session/theming/colors.dart';
 import 'package:firebase_session/widgets/button_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 
 class SignupScreen extends StatefulWidget {
   static const String routeName = "signup_screen";
@@ -13,6 +13,9 @@ class SignupScreen extends StatefulWidget {
 }
 
 class _SignupScreenState extends State<SignupScreen> {
+  final auth = FirebaseAuth.instance;
+  late String email;
+  late String password;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,7 +48,9 @@ class _SignupScreenState extends State<SignupScreen> {
                   ),
                   TextField(
                       keyboardType: TextInputType.emailAddress,
-                      onChanged: (value) {},
+                      onChanged: (value) {
+                        email = value;
+                      },
                       decoration: InputDecoration(
                         label: Text('Email'),
                         border: OutlineInputBorder(
@@ -61,7 +66,9 @@ class _SignupScreenState extends State<SignupScreen> {
                   ),
                   TextField(
                       obscureText: true,
-                      onChanged: (value) {},
+                      onChanged: (value) {
+                        password = value;
+                      },
                       decoration: InputDecoration(
                         label: Text('password'),
                         border: OutlineInputBorder(
@@ -78,7 +85,11 @@ class _SignupScreenState extends State<SignupScreen> {
                   ButtonWidget(
                       text: 'register',
                       color: Colortheme.primary,
-                      onPressrd: () async {}),
+                      onPressrd: () async {
+                        final user = await auth.createUserWithEmailAndPassword(
+                            email: email, password: password);
+                        Navigator.pushNamed(context, ChattScreen.routeName);
+                      }),
                 ])));
   }
 }
